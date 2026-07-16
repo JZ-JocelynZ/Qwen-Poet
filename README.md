@@ -1,13 +1,11 @@
 ﻿# Qwen-Poet：基于 Qwen2-0.5B LoRA 的白话文转古诗文产品
 
-> AI 产品经理作品集项目。围绕“白话文转古诗文”的垂直生成场景，完成从用户需求、数据构建、LoRA 微调、Benchmark 评测到 Web MVP 交付的完整链路。作者展示名：JZ。
+> AI 产品经理作品集项目。围绕“白话文转古诗文”的垂直生成场景，完成从用户需求、数据构建、LoRA 微调、Benchmark 评测到 Web MVP 交付的完整链路。作者：JZ。
 
 ## 在线展示
 
 - GitHub Pages 静态演示页：`https://jz-jocelynz.github.io/Qwen-Poet/`
 - 项目展示视频：`docs/assets/qwen-poet-product-demo.mp4`
-
-> GitHub Pages 发布方式：Settings -> Pages -> Build and deployment 选择 `Deploy from a branch`，Branch 选择 `main` 和 `/docs`。
 
 
 ## 项目一句话介绍
