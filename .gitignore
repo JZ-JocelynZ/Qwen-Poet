@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local config
+.env
+.env.*
+!.env.example
+
+# Model and training artifacts
+Qwen2-0.5B/
+models/
+checkpoints/
+checkpoint-*/
+output/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+optimizer.pt
+scheduler.pt
+rng_state.pth
+training_args.bin
+
+# Full datasets
+poems.json
+poems_clean.json
+*_poems.json
+*_poems_clean.json
+raw_data/
+full_data/
+
+# Notebook and IDE noise
+.ipynb_checkpoints/
+.idea/
+.vscode/
+__MACOSX/
+.DS_Store
+desktop.ini
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+outputs/
+
+# Private thesis / personal materials
+??/
+??/
+????/
+???????/
+2022-2024/
+2024??????/

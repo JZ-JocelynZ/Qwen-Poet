@@ -1,0 +1,12 @@
+flowchart LR
+  U[??] --> FE[Web MVP]
+  FE --> API[Flask RESTful API]
+  API --> MODE{POET_MODE}
+  MODE -->|mock| MOCK[Mock Generator]
+  MODE -->|model| PROMPT[Prompt Builder]
+  PROMPT --> BASE[Qwen2-0.5B]
+  BASE --> LORA[LoRA Adapter]
+  LORA --> POST[Output Parser]
+  MOCK --> RESP[JSON Response]
+  POST --> RESP
+  RESP --> FE

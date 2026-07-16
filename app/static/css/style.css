@@ -1,0 +1,52 @@
+:root {
+  --page: #f6f0e6;
+  --paper: #fffdf8;
+  --ink: #2f2a25;
+  --muted: #72675c;
+  --accent: #8b4513;
+  --accent-soft: #d8c3ad;
+  --line: #e1d3c3;
+  --success: #47724d;
+  --error: #a34444;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; color: var(--ink); font-family: "Noto Serif SC", "Microsoft YaHei", serif; background: linear-gradient(rgba(255,253,248,.78), rgba(246,240,230,.92)), var(--page); }
+.container { width: min(1000px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0; }
+.page-header { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 28px; }
+.brand-mark { width: 72px; height: 72px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); background: rgba(255,253,248,.78); font-size: 34px; box-shadow: 0 10px 28px rgba(78,50,25,.12); }
+h1, h2, p { margin: 0; }
+h1 { color: var(--accent); font-size: 42px; }
+.page-header p { margin-top: 8px; color: var(--muted); }
+.panel { position: relative; margin-bottom: 24px; padding: 26px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 14px 34px rgba(70,49,30,.10); }
+.section-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+h2 { color: var(--accent); font-size: 22px; }
+.char-counter { color: var(--muted); font-size: 14px; }
+.input-wrap { position: relative; }
+textarea { width: 100%; min-height: 160px; resize: vertical; padding: 18px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: #fffaf2; font: 18px/1.8 "Noto Serif SC", "Microsoft YaHei", serif; }
+textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139,69,19,.15); }
+.watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(47,42,37,.18); pointer-events: none; font-size: 22px; }
+.presets { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0; color: var(--muted); }
+button { border: 0; cursor: pointer; font-family: inherit; }
+.presets button { padding: 8px 14px; border-radius: 999px; color: var(--ink); background: var(--accent-soft); }
+.presets button:hover { color: #fff; background: var(--accent); }
+.actions { display: flex; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; font-size: 17px; }
+.primary { flex: 2; color: #fff; background: var(--accent); }
+.secondary { flex: 1; color: var(--ink); background: var(--accent-soft); }
+.icon-actions { display: flex; gap: 8px; }
+.icon-actions button { min-width: 48px; height: 36px; border-radius: 8px; color: var(--muted); background: rgba(139,69,19,.08); }
+.icon-actions button:hover { color: #fff; background: var(--accent); }
+.poetry-display { min-height: 220px; padding: 24px; border: 1px solid var(--line); border-radius: 8px; background: #fffaf2; font-size: 20px; line-height: 2; white-space: pre-wrap; }
+.poetry-line { position: relative; padding-left: 18px; margin-bottom: 12px; }
+.poetry-line::before { content: "?"; position: absolute; left: 0; color: var(--accent); }
+.calligraphy-mode .poetry-display { writing-mode: vertical-rl; min-height: 320px; overflow-x: auto; text-orientation: upright; letter-spacing: 0; }
+.calligraphy-mode .poetry-line { padding-left: 0; margin: 0 0 0 18px; }
+.calligraphy-mode .poetry-line::before { content: none; }
+.loading-overlay { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; background: rgba(255,253,248,.84); }
+.loading-overlay.active { display: flex; }
+.spinner { width: 46px; height: 46px; border: 5px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.notification { position: fixed; top: 20px; right: 20px; max-width: min(320px, calc(100vw - 40px)); padding: 13px 16px; border-left: 4px solid var(--success); border-radius: 8px; background: #fff; box-shadow: 0 10px 26px rgba(0,0,0,.16); transform: translateX(120%); transition: transform .24s ease; }
+.notification.active { transform: translateX(0); }
+.notification.error { border-left-color: var(--error); }
+@media (max-width: 700px) { .container { width: min(100% - 24px, 1000px); padding: 20px 0; } .page-header, .section-header, .actions { flex-direction: column; align-items: stretch; } h1 { font-size: 32px; } .panel { padding: 18px; } }

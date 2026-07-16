@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>古韵今译 - 白话文转古诗文系统</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <div class="brand-mark">文</div>
+      <div>
+        <h1>古韵今译</h1>
+        <p>白话文转古诗文系统 · Qwen2-0.5B LoRA 微调 · 当前模式：{{ mode }}</p>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="section-header">
+        <h2>白话文输入</h2>
+        <span class="char-counter">0/300 字</span>
+      </div>
+      <div class="input-wrap">
+        <textarea id="input-text" maxlength="300" placeholder="在此输入现代白话文..."></textarea>
+        <div class="watermark" id="watermark">输入现代白话文</div>
+      </div>
+
+      <div class="presets">
+        <span>推荐尝试：</span>
+        <button data-text="春天的雨水滋润着大地，万物开始复苏，柳树发出嫩绿的新芽，小草从土壤中钻出，百花竞相开放。">春雨春景</button>
+        <button data-text="山间的流水清澈见底，在阳光下闪闪发光，水中的鱼儿自由游动，岸边的树木倒映在水中。">山水之景</button>
+        <button data-text="月光如水般洒在大地上，照亮了寂静的夜晚，远处的山峰如墨般浓重，近处的湖水泛着银光。">月夜之美</button>
+        <button data-text="秋高气爽，金风送爽，田野里稻谷飘香，果园里硕果累累，一片丰收的景象让人心旷神怡。">金秋丰收</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="generate-btn">转为古诗文</button>
+        <button class="btn secondary" id="clear-btn">清空</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="section-header">
+        <h2>古诗文输出</h2>
+        <div class="icon-actions">
+          <button id="copy-btn" title="复制文本">复制</button>
+          <button id="calligraphy-btn" title="切换竖排展示">竖排</button>
+        </div>
+      </div>
+      <div class="poetry-display" id="output-text">
+        <div class="poetry-content"></div>
+      </div>
+      <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>正在生成古诗文...</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="notification" id="notification"><span>操作成功</span></div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
