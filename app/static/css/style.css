@@ -37,11 +37,11 @@ button { border: 0; cursor: pointer; font-family: inherit; }
 .icon-actions button { min-width: 48px; height: 36px; border-radius: 8px; color: var(--muted); background: rgba(139,69,19,.08); }
 .icon-actions button:hover { color: #fff; background: var(--accent); }
 .poetry-display { min-height: 220px; padding: 24px; border: 1px solid var(--line); border-radius: 8px; background: #fffaf2; font-size: 20px; line-height: 2; white-space: pre-wrap; }
-.poetry-line { position: relative; padding-left: 18px; margin-bottom: 12px; }
+.poetry-line { position: relative; padding-left: 0; margin-bottom: 12px; }
 .poetry-line::before { content: "?"; position: absolute; left: 0; color: var(--accent); }
 .calligraphy-mode .poetry-display { writing-mode: vertical-rl; min-height: 320px; overflow-x: auto; text-orientation: upright; letter-spacing: 0; }
 .calligraphy-mode .poetry-line { padding-left: 0; margin: 0 0 0 18px; }
-.calligraphy-mode .poetry-line::before { content: none; }
+.calligraphy-mode .poetry-line::before { content: ""; display: none; }
 .loading-overlay { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; background: rgba(255,253,248,.84); }
 .loading-overlay.active { display: flex; }
 .spinner { width: 46px; height: 46px; border: 5px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
