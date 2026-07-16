@@ -2,7 +2,6 @@
 
 > AI 产品经理作品集项目。围绕“白话文转古诗文”的垂直生成场景，完成从用户需求、数据构建、LoRA 微调、Benchmark 评测到 Web MVP 交付的完整链路。作者展示名：JZ。
 
-![Qwen-Poet Mock Demo](assets/screenshots/mock_mode.svg)
 
 ## 项目一句话介绍
 
