@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
   <rect width="1100" height="720" fill="#f6f0e6"/>
   <rect x="80" y="48" width="940" height="624" rx="10" fill="#fffdf8" stroke="#e1d3c3"/>
   <circle cx="174" cy="122" r="42" fill="#fffaf2" stroke="#d8c3ad"/>
-  <text x="174" y="136" text-anchor="middle" font-size="36" fill="#8b4513" font-family="serif">?</text>
-  <text x="240" y="112" font-size="42" font-weight="700" fill="#8b4513" font-family="serif">????</text>
-  <text x="242" y="146" font-size="18" fill="#72675c" font-family="serif">????????? ? Qwen2-0.5B LoRA ??</text>
+  <text x="174" y="136" text-anchor="middle" font-size="36" fill="#8b4513" font-family="Microsoft YaHei, SimSun, serif">文</text>
+  <text x="240" y="112" font-size="42" font-weight="700" fill="#8b4513" font-family="Microsoft YaHei, SimSun, serif">古韵今译</text>
+  <text x="242" y="146" font-size="18" fill="#72675c" font-family="Microsoft YaHei, SimSun, serif">白话文转古诗文系统 · Qwen2-0.5B LoRA 微调</text>
   <rect x="120" y="196" width="860" height="190" rx="8" fill="#fffaf2" stroke="#e1d3c3"/>
-  <text x="146" y="235" font-size="24" fill="#8b4513" font-family="serif">?????</text>
-  <text x="146" y="282" font-size="20" fill="#2f2a25" font-family="serif">???????????????????????????...</text>
+  <text x="146" y="235" font-size="24" fill="#8b4513" font-family="Microsoft YaHei, SimSun, serif">白话文输入</text>
+  <text x="146" y="282" font-size="20" fill="#2f2a25" font-family="Microsoft YaHei, SimSun, serif">春天的雨水滋润着大地，万物开始复苏，柳树发出嫩绿的新芽...</text>
   <rect x="146" y="322" width="160" height="42" rx="8" fill="#8b4513"/>
-  <text x="226" y="350" text-anchor="middle" font-size="18" fill="white" font-family="serif">?????</text>
+  <text x="226" y="350" text-anchor="middle" font-size="18" fill="white" font-family="Microsoft YaHei, SimSun, serif">转为古诗文</text>
   <rect x="120" y="420" width="860" height="200" rx="8" fill="#fffaf2" stroke="#e1d3c3"/>
-  <text x="146" y="460" font-size="24" fill="#8b4513" font-family="serif">?????</text>
-  <text x="166" y="512" font-size="24" fill="#2f2a25" font-family="serif">?????</text>
-  <text x="166" y="552" font-size="24" fill="#2f2a25" font-family="serif">?????</text>
-  <text x="166" y="592" font-size="24" fill="#2f2a25" font-family="serif">?????</text>
+  <text x="146" y="460" font-size="24" fill="#8b4513" font-family="Microsoft YaHei, SimSun, serif">古诗文输出</text>
+  <text x="166" y="512" font-size="24" fill="#2f2a25" font-family="Microsoft YaHei, SimSun, serif">春雨润平畴</text>
+  <text x="166" y="552" font-size="24" fill="#2f2a25" font-family="Microsoft YaHei, SimSun, serif">柳眼试新柔</text>
+  <text x="166" y="592" font-size="24" fill="#2f2a25" font-family="Microsoft YaHei, SimSun, serif">芳草穿泥出</text>
 </svg>
