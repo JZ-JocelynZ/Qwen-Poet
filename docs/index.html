@@ -1,71 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Qwen-Poet Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>古韵今译 - Qwen-Poet</title>
   <style>
-    :root{--bg:#f7f1e7;--paper:#fffaf2;--ink:#211b16;--muted:#75695d;--brown:#8b4a20;--gold:#c9a76c;--green:#4f6f52}
-    *{box-sizing:border-box} body{margin:0;font-family:"Microsoft YaHei","Songti SC",serif;color:var(--ink);background:radial-gradient(circle at 20% 0,#fff 0,#f7f1e7 42%,#efe3d2 100%);line-height:1.7}
-    .wrap{max-width:1120px;margin:auto;padding:32px 20px 46px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
-    .title{padding:34px 0 18px}.badge{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border:1px solid #e0cfb8;border-radius:999px;color:var(--brown);background:#fff8ee;font-size:14px}
-    h1{font-size:54px;line-height:1.08;margin:18px 0 14px;letter-spacing:0}.lead{font-size:20px;color:var(--muted);margin:0 0 22px}.points{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.points span{padding:8px 12px;border-radius:10px;background:#fff;border:1px solid #eadcc9;color:#5c4635}
-    .panel{background:rgba(255,250,242,.92);border:1px solid #e5d4bd;border-radius:18px;box-shadow:0 24px 60px rgba(70,45,20,.13);padding:24px}.demo{display:grid;gap:16px}
-    .top{display:flex;justify-content:space-between;gap:16px;align-items:center}.logo{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--brown);color:white;font-size:28px;font-weight:700}.mode{color:var(--green);font-size:14px}
-    textarea{width:100%;min-height:150px;border:1px solid #dec9ad;border-radius:12px;background:#fffdf8;padding:16px;font-size:17px;resize:vertical;color:var(--ink)}
-    .chips{display:flex;flex-wrap:wrap;gap:10px}.chips button{border:0;border-radius:999px;background:#dbc7ac;padding:9px 14px;cursor:pointer;color:#2c2118;font:inherit}.chips button:hover{background:var(--brown);color:white}
-    .actions{display:grid;grid-template-columns:1fr 140px;gap:12px}.primary,.secondary{border:0;border-radius:12px;min-height:48px;font:inherit;cursor:pointer}.primary{background:var(--brown);color:white;font-weight:700}.secondary{background:#d8c6ae}
-    .output{min-height:185px;border:1px solid #dec9ad;border-radius:12px;background:#fffdf8;padding:22px;font-size:20px;line-height:2;white-space:pre-line}
-    .section{margin-top:28px}.section h2{font-size:28px;margin:0 0 14px;color:#673715}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fffaf2;border:1px solid #eadcc9;border-radius:14px;padding:16px}.card strong{display:block;color:#673715;margin-bottom:6px}
-    video{width:100%;border-radius:16px;border:1px solid #e5d4bd;background:#111;box-shadow:0 18px 50px rgba(70,45,20,.14)}.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.links a{color:white;background:var(--brown);text-decoration:none;padding:10px 14px;border-radius:10px}.links a.light{background:#efe1cf;color:#4e3827}
-    @media(max-width:860px){.hero{grid-template-columns:1fr}h1{font-size:40px}.grid{grid-template-columns:1fr 1fr}.actions{grid-template-columns:1fr}}
+    :root {
+      --main-bg: #f8f4e8;
+      --paper-bg: #fff;
+      --ink-color: #333;
+      --accent: #8b4513;
+      --light-accent: #d9c5b2;
+      --ink-light: #665e53;
+      --success: #507350;
+      --error: #a35050;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Noto Serif SC", "Songti SC", "Microsoft YaHei", serif;
+      min-height: 100vh;
+      color: var(--ink-color);
+      background-color: var(--main-bg);
+      background-image: radial-gradient(circle at 20% 0, rgba(255,255,255,.92), rgba(248,244,232,.72) 42%, rgba(236,224,206,.84));
+      line-height: 1.6;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+    header { text-align: center; margin-bottom: 34px; }
+    .logo-container { display: flex; align-items: center; justify-content: center; gap: 20px; }
+    .logo { width: 80px; height: 80px; display: grid; place-items: center; color: var(--accent); background: rgba(255,255,255,.75); border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,.1); font-size: 38px; font-weight: 700; }
+    h1 { font-size: 3rem; color: var(--accent); letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,.1); }
+    .subtitle { font-size: 1.16rem; color: var(--ink-light); margin-top: 10px; }
+    .main-content { display: flex; flex-direction: column; gap: 30px; }
+    .input-section, .output-section, .video-section {
+      background-color: var(--paper-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      padding: 30px;
+      border: 1px solid rgba(139,69,19,.12);
+    }
+    .input-header, .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 16px; }
+    h2 { font-size: 1.5rem; color: var(--accent); }
+    .char-counter, .mode-tag { color: var(--ink-light); font-size: .95rem; }
+    .input-container { position: relative; margin-bottom: 20px; }
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid var(--light-accent);
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 1.1rem;
+      resize: none;
+      background-color: #fdfbf7;
+      color: var(--ink-color);
+      line-height: 1.7;
+      font-family: inherit;
+    }
+    textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(139,69,19,.2); }
+    .presets-container { margin: 15px 0 25px; background-color: rgba(255,255,255,.5); padding: 18px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,.05); }
+    .presets-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 12px; color: var(--accent); }
+    .presets-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    button { border: none; cursor: pointer; font-family: inherit; }
+    .preset-item { padding: 10px 18px; background-color: var(--light-accent); color: #333; border-radius: 20px; font-size: .95rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    .preset-item:hover { background-color: var(--accent); color: white; transform: translateY(-2px); }
+    .button-row { display: flex; gap: 15px; margin-top: 10px; }
+    .btn { min-height: 50px; border-radius: 8px; font-size: 1.05rem; font-weight: 500; }
+    .btn-primary { flex: 2; background-color: var(--accent); color: white; box-shadow: 0 4px 6px rgba(139,69,19,.2); }
+    .btn-secondary { flex: 1; background-color: var(--light-accent); color: var(--ink-color); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,.15); }
+    .output-controls { display: flex; gap: 10px; }
+    .small-btn { padding: 9px 14px; border-radius: 8px; color: var(--ink-light); background: rgba(139,69,19,.08); }
+    .small-btn:hover { background: var(--accent); color: white; }
+    .poetry-display {
+      min-height: 220px;
+      background-color: #fdfbf7;
+      border: 1px solid var(--light-accent);
+      border-radius: 8px;
+      padding: 25px;
+      font-size: 1.2rem;
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+    .poetry-line { margin-bottom: 18px; padding-left: 18px; position: relative; }
+    .poetry-line::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); position: absolute; left: 0; top: 1.1em; }
+    video { width: 100%; border-radius: 10px; border: 1px solid var(--light-accent); background: #111; box-shadow: 0 8px 18px rgba(0,0,0,.12); }
+    .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; justify-content: center; }
+    .links a { text-decoration: none; color: white; background: var(--accent); padding: 10px 16px; border-radius: 8px; }
+    footer { text-align: center; padding: 26px 0 10px; color: var(--ink-light); font-size: .92rem; }
+    @media (max-width: 768px) {
+      .container { padding: 18px 12px; }
+      .logo-container, .input-header, .output-header, .button-row { flex-direction: column; align-items: stretch; }
+      h1 { font-size: 2.2rem; text-align: center; }
+      .logo { margin: 0 auto; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="title">
-        <div class="badge">AI Product Portfolio · JZ</div>
-        <h1>Qwen-Poet<br>白话文转古诗文产品</h1>
-        <p class="lead">基于 Qwen2-0.5B + LoRA 微调，完成从用户需求、数据构建、模型训练、评测体系到 Web MVP 的 AI 产品闭环。</p>
-        <div class="points"><span>LoRA 微调</span><span>Prompt Engineering</span><span>Benchmark 评测</span><span>Flask API</span><span>Web MVP</span></div>
-        <div class="links">
-          <a href="../README.md">查看项目 README</a>
-          <a class="light" href="https://github.com/JZ-JocelynZ/Qwen-Poet">GitHub 仓库</a>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <div class="logo">文</div>
+        <div class="title-container">
+          <h1>古韵今译</h1>
+          <div class="subtitle">白话文转古诗文系统 · Qwen2-0.5B LoRA 微调 · 作者展示名：JZ</div>
         </div>
       </div>
-      <div class="panel demo">
-        <div class="top"><div style="display:flex;gap:12px;align-items:center"><div class="logo">文</div><div><strong>古韵今译</strong><br><span class="mode">Static Demo / Mock Preview</span></div></div></div>
-        <textarea id="input">春天的雨水滋润着大地，万物开始复苏，柳树发出嫩绿的新芽。</textarea>
-        <div class="chips">
-          <button data-text="春天的雨水滋润着大地，万物开始复苏，柳树发出嫩绿的新芽。">春雨春景</button>
-          <button data-text="山间流水清澈见底，阳光照在水面上，鱼儿自由游动。">山水之景</button>
-          <button data-text="月光洒在寂静的夜晚，远山如墨，湖水泛着银光。">月夜之美</button>
+    </header>
+
+    <div class="main-content">
+      <section class="input-section">
+        <div class="input-header">
+          <h2>白话文输入</h2>
+          <div class="char-counter" id="counter">0/200 字</div>
         </div>
-        <div class="actions"><button class="primary" id="gen">转为古诗文</button><button class="secondary" id="clear">清空</button></div>
-        <div class="output" id="output">春雨润芳原
-万物醒新烟
-柳色初含翠
-花光欲满天</div>
-      </div>
-    </section>
-    <section class="section">
-      <h2>项目展示视频</h2>
-      <video src="assets/qwen-poet-product-demo.mp4" controls preload="metadata"></video>
-    </section>
-    <section class="section grid">
-      <div class="card"><strong>数据</strong>2,018 条原文-译文样本，构建垂直生成任务数据集。</div>
-      <div class="card"><strong>模型</strong>Qwen2-0.5B + LoRA，面向古诗文风格适配。</div>
-      <div class="card"><strong>评测</strong>BLEU、ROUGE-L、Perplexity、RNN/LSTM baseline 与用户评测。</div>
-      <div class="card"><strong>产品</strong>Flask RESTful API + Web MVP，支持 mock 与真实模型模式。</div>
-    </section>
-  </main>
+        <div class="input-container">
+          <textarea id="input-text" placeholder="在此输入白话文..."></textarea>
+        </div>
+        <div class="presets-container">
+          <div class="presets-title">推荐尝试：</div>
+          <div class="presets-list">
+            <button class="preset-item" data-key="spring" data-text="春天的雨水滋润着大地，万物开始复苏，柳树发出嫩绿的新芽，小草从土壤中钻出来，百花竞相开放">春雨春景</button>
+            <button class="preset-item" data-key="mountain" data-text="山间的流水清澈见底，在阳光下闪闪发光，水中的鱼儿自由游动，岸边的树木倒映在水中">山水之景</button>
+            <button class="preset-item" data-key="moon" data-text="月光如水般洒在大地上，照亮了寂静的夜晚，远处的山峦如墨般浓重，近处的湖水泛着银光">月夜之美</button>
+            <button class="preset-item" data-key="autumn" data-text="秋高气爽，金风送爽，田野里稻谷飘香，果园里硕果累累">金秋丰收</button>
+          </div>
+        </div>
+        <div class="button-row">
+          <button class="btn btn-primary" id="generate-btn">转为古诗文</button>
+          <button class="btn btn-secondary" id="clear-btn">清空</button>
+        </div>
+      </section>
+
+      <section class="output-section">
+        <div class="output-header">
+          <h2>古诗文输出</h2>
+          <div class="output-controls">
+            <button class="small-btn" id="copy-btn">复制</button>
+            <button class="small-btn" id="vertical-btn">竖排</button>
+          </div>
+        </div>
+        <div class="poetry-display" id="output-text"></div>
+      </section>
+
+      <section class="video-section">
+        <div class="output-header">
+          <h2>项目展示视频</h2>
+          <div class="mode-tag">Product Demo</div>
+        </div>
+        <video src="assets/qwen-poet-product-demo.mp4" controls preload="metadata"></video>
+      </section>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/JZ-JocelynZ/Qwen-Poet">查看 GitHub 仓库</a>
+    </div>
+    <footer>AI 产品经理作品集项目 | Qwen2-0.5B + LoRA | Flask RESTful API | Web MVP</footer>
+  </div>
+
   <script>
-    const input=document.getElementById("input"),out=document.getElementById("output");
-    const samples=["春雨润芳原\n万物醒新烟\n柳色初含翠\n花光欲满天","清泉鸣石罅\n日影动寒流\n鱼行入画幽\n树色涵波静","月色铺银汉\n遥山入夜深\n湖光摇素影\n虫语落疏林"];
-    document.querySelectorAll("[data-text]").forEach((b,i)=>b.onclick=()=>{input.value=b.dataset.text;out.textContent=samples[i]});
-    document.getElementById("gen").onclick=()=>{out.textContent=samples[Math.floor(Math.random()*samples.length)]};
-    document.getElementById("clear").onclick=()=>{input.value="";out.textContent=""};
+    const input = document.getElementById("input-text");
+    const output = document.getElementById("output-text");
+    const counter = document.getElementById("counter");
+    const poems = {
+      spring: "春雨润芳原\n万物醒新烟\n柳色初含翠\n花光欲满天",
+      mountain: "清泉鸣石罅\n日影动寒流\n鱼行入画幽\n树色涵波静",
+      moon: "月色铺银汉\n遥山入夜深\n湖光摇素影\n虫语落疏林",
+      autumn: "金风催稻熟\n野色入晴秋\n果满千枝重\n人间一望收",
+      default: "白话入清辞\n新声寄古心\n一行涵远意\n半纸见云深"
+    };
+    function render(text) {
+      output.innerHTML = text.split("\n").map(line => `<div class="poetry-line">${line}</div>`).join("");
+    }
+    document.querySelectorAll(".preset-item").forEach(btn => {
+      btn.onclick = () => { input.value = btn.dataset.text; counter.textContent = `${input.value.length}/200 字`; render(poems[btn.dataset.key]); };
+    });
+    input.oninput = () => counter.textContent = `${input.value.length}/200 字`;
+    document.getElementById("generate-btn").onclick = () => render(poems.default);
+    document.getElementById("clear-btn").onclick = () => { input.value = ""; output.innerHTML = ""; counter.textContent = "0/200 字"; };
+    document.getElementById("copy-btn").onclick = () => navigator.clipboard && navigator.clipboard.writeText(output.innerText || "");
+    document.getElementById("vertical-btn").onclick = () => output.style.writingMode = output.style.writingMode ? "" : "vertical-rl";
+    input.value = document.querySelector(".preset-item").dataset.text;
+    counter.textContent = `${input.value.length}/200 字`;
+    render(poems.spring);
   </script>
 </body>
 </html>
