@@ -7,6 +7,8 @@
 - GitHub Pages 静态演示页：`https://jz-jocelynz.github.io/Qwen-Poet/`
 - 项目展示视频：`docs/assets/qwen-poet-product-demo.mp4`
 
+> GitHub Pages 发布方式：Settings -> Pages -> Build and deployment 选择 `Deploy from a branch`，Branch 选择 `main` 和 `/docs`。
+
 
 ## 项目一句话介绍
 
