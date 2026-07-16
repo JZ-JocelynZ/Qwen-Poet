@@ -160,6 +160,7 @@
     const input = document.getElementById("input-text");
     const output = document.getElementById("output-text");
     const counter = document.getElementById("counter");
+    let selectedPreset = "spring";
     const poems = {
       spring: "春雨润芳原\n万物醒新烟\n柳色初含翠\n花光欲满天",
       mountain: "清泉鸣石罅\n日影动寒流\n鱼行入画幽\n树色涵波静",
@@ -171,16 +172,23 @@
       output.innerHTML = text.split("\n").map(line => `<div class="poetry-line">${line}</div>`).join("");
     }
     document.querySelectorAll(".preset-item").forEach(btn => {
-      btn.onclick = () => { input.value = btn.dataset.text; counter.textContent = `${input.value.length}/200 字`; render(poems[btn.dataset.key]); };
+      btn.onclick = () => {
+        selectedPreset = btn.dataset.key;
+        input.value = btn.dataset.text;
+        output.innerHTML = "";
+        counter.textContent = `${input.value.length}/200 字`;
+      };
     });
-    input.oninput = () => counter.textContent = `${input.value.length}/200 字`;
-    document.getElementById("generate-btn").onclick = () => render(poems.default);
+    input.oninput = () => {
+      selectedPreset = "";
+      counter.textContent = `${input.value.length}/200 字`;
+    };
+    document.getElementById("generate-btn").onclick = () => render(poems[selectedPreset] || poems.default);
     document.getElementById("clear-btn").onclick = () => { input.value = ""; output.innerHTML = ""; counter.textContent = "0/200 字"; };
     document.getElementById("copy-btn").onclick = () => navigator.clipboard && navigator.clipboard.writeText(output.innerText || "");
     document.getElementById("vertical-btn").onclick = () => output.style.writingMode = output.style.writingMode ? "" : "vertical-rl";
     input.value = document.querySelector(".preset-item").dataset.text;
     counter.textContent = `${input.value.length}/200 字`;
-    render(poems.spring);
   </script>
 </body>
 </html>
