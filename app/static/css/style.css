@@ -50,3 +50,7 @@ button { border: 0; cursor: pointer; font-family: inherit; }
 .notification.active { transform: translateX(0); }
 .notification.error { border-left-color: var(--error); }
 @media (max-width: 700px) { .container { width: min(100% - 24px, 1000px); padding: 20px 0; } .page-header, .section-header, .actions { flex-direction: column; align-items: stretch; } h1 { font-size: 32px; } .panel { padding: 18px; } }
+
+.poetry-line::before { content: none !important; display: none !important; }
+.poetry-content { white-space: pre-line; }
+
